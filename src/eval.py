@@ -13,7 +13,7 @@ import numpy as np
 import torch
 from tqdm import tqdm
 import matplotlib.pyplot as plt
-from torch_geometric.nn import GNNExplainer as GNNE
+from torch_geometric.explain import GNNExplainer as GNNE
 
 from src.models import GAT, GCN
 from src.train import accuracy, train_and_val

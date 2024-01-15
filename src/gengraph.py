@@ -80,7 +80,7 @@ def preprocess_input_graph(G, labels, normalize_adj=False):
     """
     # Define adj matrix
     # adj = np.array(nx.to_numpy_matrix(G))
-    adj = np.array(nx.from_numpy_array(G))
+    adj = np.array(nx.to_numpy_array(G))
     if normalize_adj:
         sqrt_deg = np.diag(1.0 / np.sqrt(np.sum(adj, axis=0, dtype=float).squeeze()))
         adj = np.matmul(np.matmul(sqrt_deg, adj), sqrt_deg)
