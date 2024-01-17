@@ -31,7 +31,7 @@ def main():
     data = prepare_data(args.dataset, args.train_ratio, args.input_dim, args.seed)
     
     # Load model 
-    model_path = 'models/GCN_model_{}.pth'.format(args.dataset)
+    model_path = '/content/drive/MyDrive/Research/GraphSVX/models/GCN_model_{}.pth'.format(args.dataset)
     model = torch.load(model_path)
 
     # Evaluate GraphSVX 

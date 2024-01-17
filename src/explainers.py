@@ -1622,7 +1622,7 @@ class GraphSVX():
                                    y=self.data.y,
                                    threshold=None)
 
-        plt.savefig('results/GS1_{}_{}_{}'.format(self.data.name,
+        plt.savefig('/content/drive/MyDrive/Research/GraphSVX/results/GS1_{}_{}_{}'.format(self.data.name,
                                                   self.model.__class__.__name__,
                                                   node_index),
                     bbox_inches='tight')
@@ -1641,7 +1641,7 @@ class GraphSVX():
                   edge_vmax=None,
                   args=None)
 
-        plt.savefig('results/GS_{}_{}_{}'.format(self.data.name,
+        plt.savefig('/content/drive/MyDrive/Research/GraphSVX/results/GS_{}_{}_{}'.format(self.data.name,
                                                  self.model.__class__.__name__,
                                                  node_index),
                     bbox_inches='tight')

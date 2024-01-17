@@ -35,6 +35,7 @@ def prepare_data(dataset, train_ratio=0.8, input_dim=None, seed=10):
     # Retrieve main path of project
     dirname = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
+
     # Download and store dataset at chosen location
     if dataset == 'Cora' or dataset == 'PubMed' or dataset == 'Citeseer':
         path = os.path.join(dirname, 'data')
@@ -239,8 +240,7 @@ def synthetic_data(dataset, dirname, train_ratio=0.8, input_dim=10):
     Pipeline was adapted so as to fit ours. 
     """
     # Define path where dataset should be saved
-    data_path = "data/{}.pth".format(dataset)
-
+    data_path = "/content/drive/MyDrive/Research/GraphSVX/data/{}.pth".format(dataset)
     # If already created, do not recreate
     if os.path.exists(data_path):
         data = torch.load(data_path)

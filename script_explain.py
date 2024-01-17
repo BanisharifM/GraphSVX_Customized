@@ -27,7 +27,7 @@ def main():
                         args.input_dim, args.seed)
 
     # Load the model
-    model_path = 'models/{}_model_{}.pth'.format(args.model, args.dataset)
+    model_path = '/content/drive/MyDrive/Research/GraphSVX/models/{}_model_{}.pth'.format(args.model, args.dataset)
     model = torch.load(model_path)
     
     # Evaluate the model 
