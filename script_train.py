@@ -70,7 +70,7 @@ def main():
         print('Test accuracy is {:.4f}'.format(test_acc))
     
     # Save model 
-    model_path = '/content/drive/MyDrive/Research/GraphSVX/models/{}_model_{}.pth'.format(args.model, args.dataset)
+    model_path = 'models/{}_model_{}.pth'.format(args.model, args.dataset)
     if not os.path.exists(model_path) or args.save==True:
         torch.save(model, model_path)
 
