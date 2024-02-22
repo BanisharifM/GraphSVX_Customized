@@ -19,6 +19,61 @@ import src.gengraph as gengraph
 import pickle as pkl
 from utils.graph_utils import get_graph_data
 
+import torch.nn as nn
+
+class HeteroRegressor(nn.Module):
+    def __init__(self, in_dim, hidden_dim, n_classes, rel_names):
+        super().__init__()
+
+        self.rgcn = RGCN(in_dim, hidden_dim, hidden_dim, rel_names)
+        self.regressor = nn.Linear(hidden_dim, 1)
+
+    def forward(self, g):
+        h = g.ndata['feat']
+        # print('h feat {}'.format(h))
+        h = self.rgcn(g, h)
+        # print('damn h for g {} \n ge herre {}'.format(g, h))
+        # print('h shape {}'.format(h))
+        # input('bbbb')
+        # if len(list(h2.keys()))>0:
+        #     h=h2
+        with g.local_scope():
+            g.ndata['h'] = h
+            hg = 0
+
+            for ntype in g.ntypes:
+                # print('ntyoe {}'.format(ntype))
+                hg = hg + dgl.mean_nodes(g, 'h', ntype=ntype)
+                # pass
+            # print('type hg {} {} {}'.format(type(hg),hg.shape,hg))
+            # input('aaaa')
+            return self.regressor(hg)
+
+
+class RGCN(nn.Module):
+    def __init__(self, in_feats, hid_feats, out_feats, rel_names):
+        super().__init__()
+        # print(rel_names)
+        # print('out feat {}'.format(out_feats))
+        self.conv1 = dglnn.HeteroGraphConv({
+            rel: dglnn.GraphConv(in_feats, hid_feats)
+            for rel in rel_names}, aggregate='sum')
+        self.conv2 = dglnn.HeteroGraphConv({
+            rel: dglnn.GraphConv(hid_feats, hid_feats)
+            for rel in rel_names}, aggregate='sum')
+        self.conv3 = dglnn.HeteroGraphConv({
+            rel: dglnn.GraphConv(hid_feats, hid_feats)
+            for rel in rel_names}, aggregate='sum')
+        self.conv4 = dglnn.HeteroGraphConv({
+            rel: dglnn.GraphConv(hid_feats, hid_feats)
+            for rel in rel_names}, aggregate='sum')
+        self.conv5 = dglnn.HeteroGraphConv({
+            rel: dglnn.GraphConv(hid_feats, hid_feats)
+            for rel in rel_names}, aggregate='sum')
+        self.conv6 = dglnn.HeteroGraphConv({
+            rel: dglnn.GraphConv(hid_feats, out_feats)
+            for rel in rel_names}, aggregate='sum')
+
 
 
 def prepare_data(dataset, train_ratio=0.8, input_dim=None, seed=10):
@@ -62,6 +117,8 @@ def prepare_data(dataset, train_ratio=0.8, input_dim=None, seed=10):
         data = gc_data(dataset, dirname, train_ratio)
 
     elif dataset == 'Mutagenicity':
+        data = gc_data(dataset, dirname, train_ratio)
+    else :
         data = gc_data(dataset, dirname, train_ratio)
 
     return data
@@ -240,10 +297,12 @@ def synthetic_data(dataset, dirname, train_ratio=0.8, input_dim=10):
     Pipeline was adapted so as to fit ours. 
     """
     # Define path where dataset should be saved
-    data_path = "/content/drive/MyDrive/Research/GraphSVX/data/{}.pth".format(dataset)
+    data_path = "data/bestModel.pt".format(dataset)
+    print(data_path)
     # If already created, do not recreate
     if os.path.exists(data_path):
         data = torch.load(data_path)
+        # print(data)
 
     else:
         # Construct graph
@@ -294,7 +353,7 @@ def gc_data(dataset, dirname, train_ratio=0.8):
     """
     
     # Define path where dataset should be saved
-    data_path = "data/{}.pth".format(dataset)
+    data_path = "data/syn1.pth".format(dataset)
 
     # If already created, do not recreate
     if os.path.exists(data_path):
