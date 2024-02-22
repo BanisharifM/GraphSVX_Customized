@@ -82,3 +82,11 @@ print(data)
 data=torch.load("data/bestModel.pt")
 print("\n-------------------------- Best Model Data -------------------\n")
 print(data)
+
+data=torch.load("data/bestModel_2.pt")
+print("\n-------------------------- Best Model 2 Data -------------------\n")
+print(data)
+
+data=torch.load("data/a_saveGraph.pt")
+print("\n-------------------------- a_saveGraph.pt Data -------------------\n")
+print(data)
