@@ -104,6 +104,7 @@ class GraphSVX():
                         self.data.edge_index.cuda()).exp()[node_index].max(dim=0)
             else: 
                 with torch.no_grad():
+                    print(self.data)
                     true_conf, true_pred = self.model(
                         self.data.x, 
                         self.data.edge_index).exp()[node_index].max(dim=0)
@@ -1622,7 +1623,7 @@ class GraphSVX():
                                    y=self.data.y,
                                    threshold=None)
 
-        plt.savefig('/content/drive/MyDrive/Research/GraphSVX/results/GS1_{}_{}_{}'.format(self.data.name,
+        plt.savefig('results/GS1_{}_{}_{}'.format(self.data.name,
                                                   self.model.__class__.__name__,
                                                   node_index),
                     bbox_inches='tight')
@@ -1641,7 +1642,7 @@ class GraphSVX():
                   edge_vmax=None,
                   args=None)
 
-        plt.savefig('/content/drive/MyDrive/Research/GraphSVX/results/GS_{}_{}_{}'.format(self.data.name,
+        plt.savefig('results/GS_{}_{}_{}'.format(self.data.name,
                                                  self.model.__class__.__name__,
                                                  node_index),
                     bbox_inches='tight')
