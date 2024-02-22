@@ -57,6 +57,8 @@ def eval_syn(data, model, args):
         #k = 7
         k = 5
         K = 7
+    else:
+        node_indices = list(range(400, 500, 5))
 
     # GraphSHAP - assess accuracy of explanations
     graphsvx = GraphSVX(data, model, args.gpu)
