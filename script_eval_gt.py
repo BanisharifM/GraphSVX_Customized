@@ -119,7 +119,7 @@ def main():
     data = prepare_data(args.dataset, args.train_ratio, args.input_dim, args.seed)
     
     # Load model 
-    model_path = 'models/a_saveGraph.pt'.format(args.dataset)
+    model_path = 'models/bestModel.pt'.format(args.dataset)
     model = torch.load(model_path)
 
     # Evaluate GraphSVX 

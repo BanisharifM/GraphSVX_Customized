@@ -75,17 +75,25 @@ class HeteroRegressor(nn.Module):
             return self.regressor(hg)
 
 
-data=torch.load("data/syn1.pth")
-print("\n-------------------------- Syn 1 Data -------------------\n")
+data=torch.load("models/GCN_model_syn2.pth")
+print("\n-------------------------- Syn 2 Model -------------------\n")
 print(data)
+
+data=torch.load("data/syn2.pth")
+print("\n-------------------------- Syn 2 Data -------------------\n")
+print(data)
+
+data=torch.load("data/syn6.pth")
+#print("\n-------------------------- Syn 6 Data -------------------\n")
+#print(data)
 
 data=torch.load("data/bestModel.pt")
 print("\n-------------------------- Best Model Data -------------------\n")
 print(data)
 
-data=torch.load("data/bestModel_2.pt")
-print("\n-------------------------- Best Model 2 Data -------------------\n")
-print(data)
+#data=torch.load("data/bestModel_2.pt")
+#print("\n-------------------------- Best Model 2 Data -------------------\n")
+#print(data)
 
 data=torch.load("data/a_saveGraph.pt")
 print("\n-------------------------- a_saveGraph.pt Data -------------------\n")
